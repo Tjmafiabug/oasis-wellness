@@ -1,0 +1,286 @@
+---
+import { site } from '../config/site';
+const { social, locations, services: siteServices } = site;
+const services = siteServices.map(s => s.title);
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <!-- Brand col -->
+      <div class="footer__brand">
+        <a href="/" class="footer__logo">
+          <img
+            src="/482780759_658649206736313_8881040968576041490_n.jpg"
+            alt="OASIS Wave of Wellness"
+            width="36"
+            height="36"
+            style="border-radius: 50%; object-fit: contain; flex-shrink: 0;"
+          />
+          <div>
+            <span class="footer__logo-oasis">OASIS</span>
+            <span class="footer__logo-sub">Wave of Wellness</span>
+          </div>
+        </a>
+        <p class="footer__tagline">
+          Concept by <em>Sapna Tiwari</em>
+        </p>
+        <p class="footer__desc">
+          Your third place — where beauty meets balance and self-care becomes a lifestyle.
+        </p>
+        <div class="footer__social">
+          {social.map(s => (
+            <a href={s.url} target="_blank" rel="noopener" aria-label={s.name} class="footer__social-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d={s.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Services col -->
+      <div class="footer__col">
+        <h4 class="footer__col-head">Services</h4>
+        <ul>
+          {services.map(s => (
+            <li><a href="/services">{s}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Locations col -->
+      <div class="footer__col">
+        <h4 class="footer__col-head">Locations</h4>
+        <ul>
+          {locations.map(l => (
+            <li class="footer__location">
+              <strong>{l.city}</strong>
+              <span>{l.area}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact col -->
+      <div class="footer__col">
+        <h4 class="footer__col-head">Connect</h4>
+        <ul>
+          <li><a href={`tel:${site.phoneRaw}`}>Call Us</a></li>
+          <li><a href={`https://wa.me/${site.phoneRaw}`}>WhatsApp</a></li>
+          <li><a href="/book">Book Appointment</a></li>
+          <li><a href="https://www.instagram.com/oasiswaveofwellness_noida/" target="_blank" rel="noopener">Instagram — Noida</a></li>
+          <li><a href="https://www.youtube.com/@Oasis.WaveofWellness" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+
+        <div class="footer__email">
+          <h4 class="footer__col-head" style="margin-top: 1.5rem;">Sign Up For Updates</h4>
+          <form class="footer__form" onsubmit="return false;">
+            <input type="email" placeholder="Your email" aria-label="Email address" />
+            <button type="submit" class="btn btn--solid">→</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {new Date().getFullYear()} OASIS Wave of Wellness. Concept by Sapna Tiwari. All rights reserved.</p>
+      <nav class="footer__legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--bg-dark);
+    color: rgba(255,255,255,0.75);
+    padding-top: var(--3xl);
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: var(--2xl);
+    padding-bottom: var(--2xl);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    color: var(--green-weak);
+    margin-bottom: var(--sm);
+  }
+
+  .footer__logo div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1;
+  }
+
+  .footer__logo-oasis {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .footer__logo-sub {
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .footer__tagline {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: var(--sm);
+  }
+
+  .footer__tagline em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 0.9rem;
+  }
+
+  .footer__desc {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.5);
+    max-width: 28ch;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: var(--md);
+    margin-top: var(--lg);
+  }
+
+  .footer__social-link {
+    color: rgba(255,255,255,0.4);
+    transition: color var(--duration-sm);
+  }
+
+  .footer__social-link:hover { color: var(--gold-light); }
+
+  .footer__col-head {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: var(--md);
+  }
+
+  .footer__col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--xs);
+  }
+
+  .footer__col li a {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.55);
+    transition: color var(--duration-sm);
+  }
+
+  .footer__col li a:hover { color: #fff; }
+
+  .footer__location {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .footer__location strong {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .footer__location span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer__form {
+    display: flex;
+    margin-top: var(--sm);
+  }
+
+  .footer__form input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
+    padding: 10px var(--sm);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #fff;
+    outline: none;
+    transition: border-color var(--duration-sm);
+  }
+
+  .footer__form input::placeholder { color: rgba(255,255,255,0.3); }
+
+  .footer__form input:focus {
+    border-color: var(--green-default);
+  }
+
+  .footer__form .btn {
+    padding: 10px 14px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--lg) 0;
+    gap: var(--md);
+    flex-wrap: wrap;
+  }
+
+  .footer__bottom p {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--lg);
+  }
+
+  .footer__legal a {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    transition: color var(--duration-sm);
+  }
+
+  .footer__legal a:hover { color: rgba(255,255,255,0.7); }
+
+  @media (max-width: 1024px) {
+    .footer__top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .footer__top { grid-template-columns: 1fr; }
+    .footer__bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>

@@ -1,0 +1,153 @@
+---
+import { site } from '../config/site';
+---
+
+<div id="loader" aria-hidden="true">
+  <div class="loader-inner">
+
+    <!-- Leaf mark -->
+    <div class="loader-mark">
+      <svg width="44" height="44" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 2C14 2 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 2 14 2Z" fill="currentColor" opacity="0.9"/>
+        <path d="M14 2C14 2 9 10 14 18C16.5 14 22 10 22 10C19.5 6 14 2 14 2Z" fill="currentColor" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <!-- Wordmark -->
+    <div class="loader-wordmark">
+      {site.loader.wordmark.split('').map((char, i) => (
+        <span class="char" style={`--i:${i}`}>{char}</span>
+      ))}
+    </div>
+
+    <p class="loader-tagline">{site.loader.tagline}</p>
+
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill" id="loader-bar"></div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #1a2412;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.75s cubic-bezier(0.76, 0, 0.24, 1),
+                visibility 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  #loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .loader-mark {
+    color: #4f6b38;
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+  }
+
+  .loader-wordmark {
+    display: flex;
+    gap: 4px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: #faf8f4;
+    line-height: 1;
+  }
+
+  .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: charIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)
+               calc(0.2s + var(--i) * 0.08s) forwards;
+  }
+
+  @keyframes charIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .loader-tagline {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250, 248, 244, 0.32);
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+  }
+
+  .loader-bar-track {
+    width: 100px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+  }
+
+  .loader-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #c4962a;
+    transition: width 0.2s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const loader = document.getElementById('loader')!;
+  const bar    = document.getElementById('loader-bar')!;
+  let progress = 0;
+  let done     = false;
+  let rafId: number;
+
+  function tick() {
+    const target = done ? 100 : 85;
+    const speed  = done ? 4 : 0.8;
+    progress += (target - progress) * speed / 100;
+    bar.style.width = progress + '%';
+
+    if (progress < 99.5) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      dismiss();
+    }
+  }
+
+  function dismiss() {
+    cancelAnimationFrame(rafId);
+    bar.style.width = '100%';
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      document.documentElement.classList.remove('is-loading');
+      loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+    }, 300);
+  }
+
+  rafId = requestAnimationFrame(tick);
+  window.addEventListener('load', () => { done = true; });
+  setTimeout(() => { done = true; }, 4000);
+</script>

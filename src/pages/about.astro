@@ -1,0 +1,469 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import BookCTA from '../components/BookCTA.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+const { about, founder, name } = site;
+const pillars = about.philosophyPillars;
+const milestones = about.milestones;
+const credentials = about.credentials;
+const team = about.team;
+---
+
+<Layout
+  title="About — OASIS Wave of Wellness"
+  description="Meet Sapna Tiwari, the founder behind OASIS Wave of Wellness. A decade of expertise, three locations, and a vision for accessible luxury wellness across Delhi NCR."
+>
+  <Nav />
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero section--dark">
+      <div class="container page-hero__inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">→</span>
+          <span>About</span>
+        </nav>
+        <span class="label label--gold">Our Story</span>
+        <h1 class="heading-display">The Mind<br /><em>Behind the Oasis</em></h1>
+        <p class="page-hero__sub">A decade of care, a lifetime of passion — meet Sapna Tiwari.</p>
+      </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="section founder-section">
+      <div class="container founder-section__inner">
+        <div class="founder-section__img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80&auto=format&fit=crop"
+            alt="Sapna Tiwari — Founder, OASIS Wave of Wellness"
+            class="founder-section__img"
+            loading="eager"
+          />
+          <div class="founder-section__badge">
+            <span class="founder-section__badge-years">10+</span>
+            <span class="founder-section__badge-text">Years of<br />Expertise</span>
+          </div>
+        </div>
+
+        <div class="founder-section__content">
+          <span class="label">Concept by</span>
+          <h2 class="heading-lg founder-section__name">Sapna Tiwari</h2>
+          <div class="divider divider--left"></div>
+
+          <blockquote class="founder-section__quote">
+            "I didn't set out to open a clinic. I set out to create a place where women could walk in feeling drained — and walk out feeling like themselves again."
+          </blockquote>
+
+          <p class="body-sm founder-section__text">
+            Sapna Tiwari's journey began long before OASIS — in years of training, research, and a quiet frustration with wellness spaces that were either too clinical or too superficial. She envisioned a third way: expert care delivered with warmth, in an environment that felt genuinely restorative.
+          </p>
+          <p class="body-sm founder-section__text">
+            In 2014, she turned that vision into OASIS Wave of Wellness in Noida Sector 18. A decade later, OASIS spans three locations across Delhi NCR, employs a team of certified specialists, and serves thousands of clients who return — not just for results, but for the experience.
+          </p>
+
+          <div class="founder-section__stats">
+            <div class="founder-stat">
+              <span class="founder-stat__num">10+</span>
+              <span class="founder-stat__label">Years Experience</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat__num">10K+</span>
+              <span class="founder-stat__label">Clients Served</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat__num">4.9★</span>
+              <span class="founder-stat__label">Google Rating</span>
+            </div>
+          </div>
+
+          <a href="/book" class="btn btn--outline" style="margin-top: 1.5rem; display: inline-flex;">
+            Book a Consultation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="section section--tinted pillars-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="label">Our Philosophy</span>
+          <h2 class="heading-lg">What We Stand For</h2>
+          <div class="divider"></div>
+        </header>
+        <div class="pillars-grid">
+          {pillars.map(p => (
+            <div class="pillar-card">
+              <span class="pillar-card__icon" aria-hidden="true">{p.icon}</span>
+              <h3 class="heading-md pillar-card__title">{p.title}</h3>
+              <p class="body-sm">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section timeline-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="label">Our Journey</span>
+          <h2 class="heading-lg">A Decade of Wellness</h2>
+          <div class="divider"></div>
+        </header>
+        <div class="timeline">
+          {milestones.map((m) => (
+            <div class="timeline__item">
+              <div class="timeline__year">{m.year}</div>
+              <div class="timeline__spine">
+                <div class="timeline__dot"></div>
+              </div>
+              <div class="timeline__content">
+                <p class="body-sm">{m.event}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section class="section section--dark credentials-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="label label--gold">Certifications & Affiliations</span>
+          <h2 class="heading-lg" style="color: #fff;">Trusted. Certified. Verified.</h2>
+          <div class="divider"></div>
+        </header>
+        <ul class="credentials-grid">
+          {credentials.map(c => (
+            <li class="credential-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="credential-item__icon">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="label">The People</span>
+          <h2 class="heading-lg">Expert Hands, Caring Hearts</h2>
+          <div class="divider"></div>
+          <p class="body-lg" style="margin-top: 1rem;">
+            Our team of certified dermatologists, trichologists, and wellness practitioners bring decades of combined expertise to every session.
+          </p>
+        </header>
+        <div class="team-grid">
+          {team.map(member => (
+            <div class="team-card">
+              <div class="team-card__img-wrap">
+                <img src={member.img} alt={member.name} class="team-card__img" loading="lazy" />
+              </div>
+              <div class="team-card__body">
+                <h3 class="heading-md team-card__name">{member.name}</h3>
+                <span class="label">{member.role}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <BookCTA />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Page Hero ── */
+  .page-hero {
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    padding: var(--2xl) 0;
+  }
+
+  .page-hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--md);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: var(--xs);
+  }
+
+  .breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    transition: color var(--duration-sm);
+  }
+
+  .breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+
+  .page-hero .heading-display { color: #fff; }
+
+  .page-hero .heading-display em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .page-hero__sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 44ch;
+    margin-top: var(--xs);
+  }
+
+  /* ── Founder Section ── */
+  .founder-section__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--2xl);
+    align-items: center;
+  }
+
+  .founder-section__img-wrap {
+    position: relative;
+  }
+
+  .founder-section__img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+  }
+
+  .founder-section__badge {
+    position: absolute;
+    bottom: var(--lg);
+    right: calc(-1 * var(--xl));
+    background: var(--green-default);
+    color: #fff;
+    padding: var(--lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 100px;
+  }
+
+  .founder-section__badge-years {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .founder-section__badge-text {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .founder-section__name {
+    margin-top: var(--sm);
+    margin-bottom: var(--md);
+  }
+
+  .founder-section__quote {
+    margin-top: var(--md);
+    margin-bottom: var(--lg);
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--green-dark);
+    border-left: 3px solid var(--gold-default);
+    padding-left: var(--md);
+  }
+
+  .founder-section__text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--md);
+  }
+
+  .founder-section__stats {
+    display: flex;
+    gap: var(--xl);
+    margin-top: var(--lg);
+    padding-top: var(--lg);
+    border-top: 1px solid var(--border);
+  }
+
+  .founder-stat { display: flex; flex-direction: column; gap: 2px; }
+
+  .founder-stat__num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--green-default);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .founder-stat__label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* ── Pillars ── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lg);
+  }
+
+  .pillar-card {
+    background: #fff;
+    padding: var(--xl) var(--lg);
+    border: 1px solid var(--border);
+  }
+
+  .pillar-card__icon {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--gold-default);
+    margin-bottom: var(--md);
+  }
+
+  .pillar-card__title { margin-bottom: var(--sm); }
+
+  /* ── Timeline ── */
+  .timeline {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 72px 28px 1fr;
+    gap: var(--md);
+    align-items: start;
+    padding-bottom: var(--xl);
+  }
+
+  .timeline__year {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--green-default);
+    letter-spacing: 0.04em;
+    text-align: right;
+    padding-top: 3px;
+  }
+
+  .timeline__spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .timeline__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green-default);
+    border: 2px solid var(--gold-default);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .timeline__spine::after {
+    content: '';
+    position: absolute;
+    top: 17px;
+    width: 1px;
+    height: calc(100% + var(--xl));
+    background: var(--border);
+  }
+
+  .timeline__item:last-child .timeline__spine::after { display: none; }
+
+  /* ── Credentials ── */
+  .credentials-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--md) var(--2xl);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .credential-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sm);
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .credential-item__icon {
+    color: var(--gold-default);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── Team ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--lg);
+  }
+
+  .team-card__img-wrap {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    margin-bottom: var(--md);
+  }
+
+  .team-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-lg) var(--ease);
+  }
+
+  .team-card:hover .team-card__img { transform: scale(1.04); }
+
+  .team-card__name { margin-bottom: var(--xs); }
+
+  @media (max-width: 1024px) {
+    .founder-section__inner { grid-template-columns: 1fr; }
+    .founder-section__badge { right: var(--lg); }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .credentials-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .credentials-grid { grid-template-columns: 1fr; }
+    .founder-section__stats { gap: var(--lg); }
+    .timeline__item { grid-template-columns: 56px 24px 1fr; }
+  }
+</style>

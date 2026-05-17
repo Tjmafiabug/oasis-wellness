@@ -1,0 +1,135 @@
+---
+import { site } from '../config/site';
+---
+
+<section class="book-cta" id="book">
+  <div class="book-cta__bg">
+    <img
+      src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=1600&q=80&auto=format&fit=crop"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="book-cta__overlay"></div>
+  </div>
+
+  <div class="container book-cta__content">
+    <span class="label label--white">Begin Today</span>
+    <h2 class="heading-xl book-cta__heading">
+      Your Well-Being<br />Is A Priority
+    </h2>
+    <div class="book-cta__divider"></div>
+    <p class="book-cta__sub">
+      Step into your personal oasis. Our experts are ready to craft a wellness
+      plan tailored to your unique journey.
+    </p>
+
+    <div class="book-cta__actions">
+      <a href={`tel:${site.phoneRaw}`} class="btn btn--gold">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        Call Us Now
+      </a>
+      <a href={`https://wa.me/${site.phoneRaw}`} class="btn btn--outline-white" target="_blank" rel="noopener">
+        WhatsApp Us
+      </a>
+    </div>
+
+    <p class="book-cta__locations">
+      Available at ·
+      {site.locations.map((l, i) => (
+        <>
+          <a href="#locations">{l.city}</a>
+          {i < site.locations.length - 1 && ' · '}
+        </>
+      ))}
+    </p>
+  </div>
+</section>
+
+<style>
+  .book-cta {
+    position: relative;
+    padding: var(--3xl) 0;
+    overflow: hidden;
+  }
+
+  .book-cta__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .book-cta__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .book-cta__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 40, 20, 0.92) 0%,
+      rgba(79, 107, 56, 0.85) 100%
+    );
+  }
+
+  .book-cta__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-cta__heading {
+    color: #fff;
+    margin-top: var(--md);
+  }
+
+  .book-cta__divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold-default);
+    margin: var(--lg) auto;
+  }
+
+  .book-cta__sub {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    max-width: 44ch;
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+
+  .book-cta__actions {
+    display: flex;
+    gap: var(--md);
+    margin-top: var(--xl);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .book-cta__locations {
+    margin-top: var(--xl);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .book-cta__locations a {
+    color: rgba(255,255,255,0.75);
+    transition: color var(--duration-sm);
+  }
+
+  .book-cta__locations a:hover {
+    color: var(--gold-light);
+  }
+</style>

@@ -1,0 +1,172 @@
+---
+const services = [
+  {
+    title: 'Facial Rejuvenation',
+    desc: 'Advanced treatments to restore radiance, reduce signs of ageing, and reveal your best skin.',
+    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop',
+    tag: 'Skin',
+  },
+  {
+    title: 'Hair Restoration',
+    desc: 'Science-backed therapies to combat hair fall, promote regrowth, and restore volume.',
+    img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop',
+    tag: 'Hair',
+  },
+  {
+    title: 'Advanced Skincare',
+    desc: 'Personalised protocols for hyperpigmentation, acne, scarring, and skin texture.',
+    img: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop',
+    tag: 'Skin',
+  },
+  {
+    title: 'Weight Wellness',
+    desc: 'Evidence-based body contouring and holistic weight management under expert guidance.',
+    img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80&auto=format&fit=crop',
+    tag: 'Wellness',
+  },
+  {
+    title: 'Aesthetic Dermatology',
+    desc: 'Targeted care for skin tags, keloids, moles, and dermatological conditions.',
+    img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80&auto=format&fit=crop',
+    tag: 'Clinical',
+  },
+  {
+    title: 'Holistic Treatments',
+    desc: 'Mind-body therapies that restore balance, reduce stress, and elevate overall wellbeing.',
+    img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80&auto=format&fit=crop',
+    tag: 'Wellness',
+  },
+];
+---
+
+<section class="section" id="services">
+  <div class="container">
+    <header class="section-header">
+      <span class="label">Our Expertise</span>
+      <h2 class="heading-lg">Treatments That Transform</h2>
+      <div class="divider"></div>
+      <p class="body-lg" style="margin-top: 1rem;">
+        Cutting-edge science meets personalised care across six pillars of wellness.
+      </p>
+    </header>
+
+    <div class="services__grid">
+      {services.map(s => (
+        <article class="service-card">
+          <div class="service-card__img-wrap">
+            <img src={s.img} alt={s.title} class="service-card__img" loading="lazy" />
+            <span class="service-card__tag">{s.tag}</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="heading-md service-card__title">{s.title}</h3>
+            <p class="body-sm">{s.desc}</p>
+            <a href="#book" class="service-card__link">
+              Learn More
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="services__footer">
+      <a href="#book" class="btn btn--outline">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lg);
+  }
+
+  .service-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow var(--duration-md) var(--ease),
+                transform var(--duration-md) var(--ease);
+  }
+
+  .service-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+  }
+
+  .service-card__img-wrap {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .service-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-lg) var(--ease);
+  }
+
+  .service-card:hover .service-card__img {
+    transform: scale(1.04);
+  }
+
+  .service-card__tag {
+    position: absolute;
+    top: var(--md);
+    left: var(--md);
+    background: var(--green-default);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .service-card__body {
+    padding: var(--lg);
+  }
+
+  .service-card__title {
+    margin-bottom: var(--xs);
+  }
+
+  .service-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: var(--md);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-default);
+    border-bottom: 1px solid var(--green-default);
+    padding-bottom: 1px;
+    transition: color var(--duration-sm), gap var(--duration-sm);
+  }
+
+  .service-card__link:hover {
+    gap: 8px;
+    color: var(--green-dark);
+  }
+
+  .services__footer {
+    text-align: center;
+    margin-top: var(--2xl);
+  }
+
+  @media (max-width: 1024px) {
+    .services__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .services__grid { grid-template-columns: 1fr; }
+  }
+</style>

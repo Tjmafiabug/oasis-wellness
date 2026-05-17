@@ -1,0 +1,208 @@
+---
+import { site } from '../config/site';
+const reviews = site.reviews;
+const stats = site.stats;
+---
+
+<section class="section section--tinted" id="reviews">
+  <div class="container">
+    <header class="section-header">
+      <span class="label">Client Stories</span>
+      <h2 class="heading-lg">What Our Guests Say</h2>
+      <div class="divider"></div>
+    </header>
+
+    <!-- Stats row -->
+    <div class="stats">
+      {stats.map(s => (
+        <div class="stat">
+          <span class="stat__value">{s.value}</span>
+          <span class="stat__label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Review cards -->
+    <div class="reviews__grid">
+      {reviews.map(r => (
+        <article class="review-card">
+          <div class="review-card__stars">
+            {'★'.repeat(r.rating)}
+          </div>
+          <blockquote class="review-card__text">"{r.text}"</blockquote>
+          <footer class="review-card__footer">
+            <div class="review-card__avatar">
+              {r.name.charAt(0)}
+            </div>
+            <div>
+              <p class="review-card__name">{r.name}</p>
+              <p class="review-card__loc">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-1px;">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                {r.location}
+              </p>
+            </div>
+          </footer>
+        </article>
+      ))}
+    </div>
+
+    <!-- Press / awards logos -->
+    <div class="press">
+      <span class="label" style="display:block; text-align:center; margin-bottom: 1.5rem;">As Featured In</span>
+      <div class="press__logos">
+        <span class="press__logo">JustDial<br/><small>4.9 ★ Rated</small></span>
+        <span class="press__logo">Google<br/><small>Top Wellness Clinic</small></span>
+        <span class="press__logo">Instagram<br/><small>@oasiswaveofwellness</small></span>
+        <span class="press__logo">YouTube<br/><small>@Oasis.WaveofWellness</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: var(--2xl);
+  }
+
+  .stat {
+    background: #fff;
+    text-align: center;
+    padding: var(--xl) var(--md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--xs);
+  }
+
+  .stat__value {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: var(--green-default);
+    line-height: 1;
+  }
+
+  .stat__label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lg);
+    margin-bottom: var(--2xl);
+  }
+
+  .review-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: var(--xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--md);
+  }
+
+  .review-card__stars {
+    color: var(--gold-default);
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+  }
+
+  .review-card__text {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .review-card__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    padding-top: var(--md);
+    border-top: 1px solid var(--border);
+  }
+
+  .review-card__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green-tint);
+    color: var(--green-default);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .review-card__name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .review-card__loc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .press {
+    border-top: 1px solid var(--border);
+    padding-top: var(--2xl);
+  }
+
+  .press__logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--2xl);
+    flex-wrap: wrap;
+  }
+
+  .press__logo {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .press__logo small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-default);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .reviews__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

@@ -1,0 +1,370 @@
+---
+import { site } from '../config/site';
+
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Locations', href: '/#locations' },
+  { label: 'Reviews', href: '/#reviews' },
+];
+
+function isActive(href: string) {
+  if (href.startsWith('/#')) return false;
+  return currentPath === href || currentPath.startsWith(href + '/');
+}
+---
+
+<header class="site-header" id="site-header">
+  <!-- Announcement bar -->
+  <div class="announce-bar">
+    <p>
+      ✦ {site.announce.text} &nbsp;·&nbsp; {site.announce.suffix} &nbsp;·&nbsp;
+      <a href="/book">Book Your Session →</a>
+    </p>
+  </div>
+
+  <!-- Main nav -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <!-- Logo -->
+      <a href="/" class="nav__logo" aria-label="OASIS Wave of Wellness — Home">
+        <img
+          src="/482780759_658649206736313_8881040968576041490_n.jpg"
+          alt="OASIS Wave of Wellness"
+          class="nav__logo-img"
+          width="40"
+          height="40"
+        />
+        <span class="nav__logo-text">
+          <span class="nav__logo-oasis">OASIS</span>
+          <span class="nav__logo-sub">Wave of Wellness</span>
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav__links" role="list">
+        {links.map(l => (
+          <li>
+            <a
+              href={l.href}
+              class={`nav__link${isActive(l.href) ? ' nav__link--active' : ''}`}
+              aria-current={isActive(l.href) ? 'page' : undefined}
+            >{l.label}</a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Desktop CTA -->
+      <div class="nav__cta">
+        <a href={`tel:${site.phoneRaw}`} class="nav__phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.27a16 16 0 006.29 6.29l1.8-1.8a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+          </svg>
+          Call Us
+        </a>
+        <a href="/book" class="btn btn--solid">Book Now</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+    <ul class="nav__mobile-links" role="list">
+      {links.map(l => (
+        <li>
+          <a
+            href={l.href}
+            class={`nav__mobile-link${isActive(l.href) ? ' nav__mobile-link--active' : ''}`}
+          >{l.label}</a>
+        </li>
+      ))}
+    </ul>
+    <div class="nav__mobile-cta">
+      <a href={`tel:${site.phoneRaw}`} class="nav__mobile-call">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.27a16 16 0 006.29 6.29l1.8-1.8a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+        </svg>
+        {site.phone}
+      </a>
+      <a href="/book" class="btn btn--solid" style="width: 100%; justify-content: center;">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<style is:global>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* ── Announce bar ── */
+  .announce-bar {
+    background: var(--green-default);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 9px var(--lg);
+  }
+
+  .announce-bar a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.9;
+    transition: opacity var(--duration-sm);
+  }
+
+  .announce-bar a:hover { opacity: 1; }
+
+  /* ── Nav ── */
+  .nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--xl);
+  }
+
+  /* Logo */
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--green-default);
+    flex-shrink: 0;
+  }
+
+  .nav__logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .nav__logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1;
+  }
+
+  .nav__logo-oasis {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-default);
+  }
+
+  .nav__logo-sub {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-default);
+  }
+
+  /* Desktop links */
+  .nav__links {
+    display: flex;
+    list-style: none;
+    gap: var(--xl);
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav__link {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-sm), color var(--duration-sm);
+  }
+
+  .nav__link:hover,
+  .nav__link--active {
+    color: var(--green-default);
+    border-bottom-color: var(--green-default);
+  }
+
+  /* Desktop CTA */
+  .nav__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--md);
+    flex-shrink: 0;
+  }
+
+  .nav__phone {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color var(--duration-sm);
+  }
+
+  .nav__phone:hover { color: var(--green-default); }
+
+  /* Burger */
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--xs);
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform var(--duration-sm) var(--ease),
+                opacity var(--duration-sm),
+                width var(--duration-sm);
+    transform-origin: center;
+  }
+
+  .nav__burger--open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .nav__burger--open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .nav__burger--open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ── Mobile drawer ── */
+  .nav__mobile {
+    max-height: 0;
+    overflow: hidden;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (min-width: 769px) {
+    .nav__mobile { display: none !important; }
+  }
+
+  .nav__mobile--open {
+    max-height: 480px;
+  }
+
+  .nav__mobile-links {
+    list-style: none;
+    padding: var(--md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__mobile-link {
+    display: block;
+    padding: 14px var(--lg);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-left: 2px solid transparent;
+    transition: color var(--duration-sm), border-color var(--duration-sm), background var(--duration-sm);
+  }
+
+  .nav__mobile-link:hover,
+  .nav__mobile-link--active {
+    color: var(--green-default);
+    border-left-color: var(--green-default);
+    background: var(--green-lightest);
+  }
+
+  .nav__mobile-cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm);
+    padding: var(--lg);
+  }
+
+  .nav__mobile-call {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: color var(--duration-sm);
+  }
+
+  .nav__mobile-call:hover { color: var(--green-default); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav__links, .nav__phone { display: none; }
+    .nav__burger { display: flex; }
+  }
+</style>
+
+<script>
+  const burger  = document.getElementById('nav-burger')!;
+  const drawer  = document.getElementById('nav-mobile')!;
+
+  burger.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('nav__mobile--open');
+    burger.classList.toggle('nav__burger--open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    burger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close on any link click
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      drawer.classList.remove('nav__mobile--open');
+      burger.classList.remove('nav__burger--open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+      drawer.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    const header = document.getElementById('site-header');
+    if (!header?.contains(e.target as Node)) {
+      drawer.classList.remove('nav__mobile--open');
+      burger.classList.remove('nav__burger--open');
+      burger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    }
+  });
+</script>
