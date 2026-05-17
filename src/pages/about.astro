@@ -466,4 +466,8 @@ const team = about.team;
     .founder-section__stats { gap: var(--lg); }
     .timeline__item { grid-template-columns: 56px 24px 1fr; }
   }
+
+  @media (max-width: 480px) {
+    .founder-section__stats { flex-direction: column; gap: var(--md); }
+  }
 </style>

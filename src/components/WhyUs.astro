@@ -146,6 +146,13 @@ const pillars = site.whyUsPillars;
   }
 
   @media (max-width: 900px) {
+    .whyus { grid-template-columns: 1fr 1fr; gap: var(--xl); }
+    .whyus__image img { aspect-ratio: 1/1; }
+    .whyus__badge { width: 88px; height: 88px; right: -12px; bottom: -12px; }
+    .whyus__badge-num { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 640px) {
     .whyus { grid-template-columns: 1fr; }
     .whyus__image { display: none; }
     .whyus__badge { display: none; }

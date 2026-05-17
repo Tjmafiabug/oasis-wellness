@@ -132,4 +132,14 @@ import { site } from '../config/site';
   .book-cta__locations a:hover {
     color: var(--gold-light);
   }
+
+  @media (max-width: 480px) {
+    .book-cta { padding: 56px 0; }
+    .book-cta__actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .book-cta__actions .btn { justify-content: center; }
+  }
 </style>
